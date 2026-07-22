@@ -15,10 +15,26 @@
 #     \max_{C_t,L_t, K_{t+1}} \mathbf{E} \sum_{t=0}^{\infty} \beta^t \left( \frac{C_t^{1-\sigma}}{1-\sigma} - \frac{L_t^{1+\phi}}{1+\phi} \right)
 # \end{equation}
 # 
-# subject to:
-# $P_t(C_t+I_t) = W_tL_t + R_tK_t + \Pi_t$
+# subject to: $P_t(C_t+I_t) = W_tL_t + R_tK_t + \Pi_t$
 # 
-# Capital accumulates according to: $K_{t+1} = (1-\delta)K_t + I_t$
+# Also, capital accumulates according to: $K_{t+1} = (1-\delta)K_t + I_t$
+# 
+# 
+# 
+# Where:
+# - $C_t$: Household consumption at time t.
+# - $L_t$: Labor supplied by households at time t.
+# - $K_t$: Physical capital stock available at the beginning of period t.
+# - $I_t$: Investment at time t.
+# - $Y_t$: Aggregate output (GDP) at time t.
+# - $W_t$: Nominal wage rate.
+# - $R_t$: Nominal rental rate of capital.
+# - $P_t$: Aggregate price level.
+# - $\Pi_t$: Firms' profits, distributed to households.
+# - $\beta$: Household discount factor, measuring the degree of patience.
+# - $\sigma$: Coefficient of relative risk aversion (inverse of the intertemporal elasticity of substitution).
+# - $\phi$: Inverse of the Frisch elasticity of labor supply.
+# 
 # 
 # 
 # 
@@ -29,7 +45,10 @@
 # \end{equation}
 # 
 # 
-# where $Y_t = A_tK_t^{\alpha}L_t^{1-\alpha}$
+# The production function is given by $Y_t = A_tK_t^{\alpha}L_t^{1-\alpha}$, where:
+# 
+# - $A_t$: Total factor productivity (TFP), representing the level of technology.
+# 
 # 
 # #### Equilibrium:
 # 

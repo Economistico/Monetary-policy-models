@@ -7522,13 +7522,30 @@ a.anchor-link {
 <p>\begin{equation}
     \max_{C_t,L_t, K_{t+1}} \mathbf{E} \sum_{t=0}^{\infty} \beta^t \left( \frac{C_t^{1-\sigma}}{1-\sigma} - \frac{L_t^{1+\phi}}{1+\phi} \right)
 \end{equation}</p>
-<p>subject to:
-$P_t(C_t+I_t) = W_tL_t + R_tK_t + \Pi_t$</p>
-<p>Capital accumulates according to: $K_{t+1} = (1-\delta)K_t + I_t$</p>
+<p>subject to: $P_t(C_t+I_t) = W_tL_t + R_tK_t + \Pi_t$</p>
+<p>Also, capital accumulates according to: $K_{t+1} = (1-\delta)K_t + I_t$</p>
+<p>Where:</p>
+<ul>
+<li>$C_t$: Household consumption at time t.</li>
+<li>$L_t$: Labor supplied by households at time t.</li>
+<li>$K_t$: Physical capital stock available at the beginning of period t.</li>
+<li>$I_t$: Investment at time t.</li>
+<li>$Y_t$: Aggregate output (GDP) at time t.</li>
+<li>$W_t$: Nominal wage rate.</li>
+<li>$R_t$: Nominal rental rate of capital.</li>
+<li>$P_t$: Aggregate price level.</li>
+<li>$\Pi_t$: Firms' profits, distributed to households.</li>
+<li>$\beta$: Household discount factor, measuring the degree of patience.</li>
+<li>$\sigma$: Coefficient of relative risk aversion (inverse of the intertemporal elasticity of substitution).</li>
+<li>$\phi$: Inverse of the Frisch elasticity of labor supply.</li>
+</ul>
 <h4 id="Firms:">Firms:<a class="anchor-link" href="#Firms:">¶</a></h4><p>\begin{equation}
     \max_{L_t, K_t} \Pi_t = Y_tP_t - W_tL_t - R_tW_t 
 \end{equation}</p>
-<p>where $Y_t = A_tK_t^{\alpha}L_t^{1-\alpha}$</p>
+<p>The production function is given by $Y_t = A_tK_t^{\alpha}L_t^{1-\alpha}$, where:</p>
+<ul>
+<li>$A_t$: Total factor productivity (TFP), representing the level of technology.</li>
+</ul>
 <h4 id="Equilibrium:">Equilibrium:<a class="anchor-link" href="#Equilibrium:">¶</a></h4><p>\begin{equation}
     Y_t=C_t+I_t
 \end{equation}</p>
