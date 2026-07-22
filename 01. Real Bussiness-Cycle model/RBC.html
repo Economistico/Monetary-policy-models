@@ -7536,7 +7536,7 @@ $P_t(C_t+I_t) = W_tL_t + R_tK_t + \Pi_t$</p>
     C_t^\sigma L_t^\phi = \frac{W_t}{P_t}
 \end{equation}</p>
 <p>\begin{equation}
-    \left(\frac{\mathbb{E}[C_{t+1}]}{C_t} \right)^\sigma = \beta \left[ (1-\delta) + \mathbb{E} \left(\frac{R_{t+1}}{P_{t+1}} \right)\right]
+    \left[\frac{\mathbb{E}(C_{t+1})}{C_t} \right]^\sigma = \beta \left[ (1-\delta) + \mathbb{E} \left(\frac{R_{t+1}}{P_{t+1}} \right)\right]
 \end{equation}</p>
 <p>\begin{equation}
     K_{t+1}=(1-\delta)K_t+I_t
@@ -7561,7 +7561,7 @@ $P_t(C_t+I_t) = W_tL_t + R_tK_t + \Pi_t$</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -7577,7 +7577,7 @@ $P_t(C_t+I_t) = W_tL_t + R_tK_t + \Pi_t$</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nd">@simple</span>
@@ -7613,7 +7613,7 @@ $P_t(C_t+I_t) = W_tL_t + R_tK_t + \Pi_t$</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">rbc</span> <span class="o">=</span> <span class="n">create_model</span><span class="p">([</span><span class="n">firm</span><span class="p">,</span> <span class="n">household</span><span class="p">,</span> <span class="n">capital</span><span class="p">,</span> <span class="n">equilibrium</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">"RBC"</span><span class="p">)</span>
@@ -7644,7 +7644,7 @@ Blocks: [&lt;SimpleBlock 'capital'&gt;, &lt;SimpleBlock 'firm'&gt;, &lt;SimpleBl
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">unknowns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'K'</span><span class="p">,</span> <span class="s1">'L'</span><span class="p">]</span>
@@ -7660,7 +7660,7 @@ Blocks: [&lt;SimpleBlock 'capital'&gt;, &lt;SimpleBlock 'firm'&gt;, &lt;SimpleBl
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># It is used the same calibration that the book suggests as well as the steady state values</span>
@@ -7677,7 +7677,7 @@ Blocks: [&lt;SimpleBlock 'capital'&gt;, &lt;SimpleBlock 'firm'&gt;, &lt;SimpleBl
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">ss</span> <span class="o">=</span> <span class="n">rbc</span><span class="o">.</span><span class="n">solve_steady_state</span><span class="p">(</span><span class="n">calibration</span><span class="p">,</span> <span class="n">unknowns_ss</span><span class="p">,</span> <span class="n">targets_ss</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s2">"hybr"</span><span class="p">)</span>
@@ -7706,7 +7706,7 @@ Blocks: [&lt;SimpleBlock 'capital'&gt;, &lt;SimpleBlock 'firm'&gt;, &lt;SimpleBl
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Euler equation: </span><span class="si">{</span><span class="n">ss</span><span class="p">[</span><span class="s1">'euler'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -7735,7 +7735,7 @@ Goods market clearing: 2.220446049250313e-16
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">rbc</span><span class="o">.</span><span class="n">solve_jacobian</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="n">unknowns</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
@@ -7764,7 +7764,7 @@ Goods market clearing: 2.220446049250313e-16
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Here it is imposed a productivity shock</span>
@@ -7800,7 +7800,7 @@ Goods market clearing: 2.220446049250313e-16
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">z_shock</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">dZ</span> <span class="o">/</span> <span class="n">ss</span><span class="p">[</span><span class="s1">'A'</span><span class="p">]</span>
@@ -7821,7 +7821,7 @@ Goods market clearing: 2.220446049250313e-16
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>

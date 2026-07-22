@@ -44,7 +44,7 @@
 # \end{equation}
 # 
 # \begin{equation}
-#     \left(\frac{\mathbb{E}[C_{t+1}]}{C_t} \right)^\sigma = \beta \left[ (1-\delta) + \mathbb{E} \left(\frac{R_{t+1}}{P_{t+1}} \right)\right]
+#     \left[\frac{\mathbb{E}(C_{t+1})}{C_t} \right]^\sigma = \beta \left[ (1-\delta) + \mathbb{E} \left(\frac{R_{t+1}}{P_{t+1}} \right)\right]
 # \end{equation}
 # 
 # \begin{equation}
@@ -67,7 +67,7 @@
 #     Y_t = C_t + I_t
 # \end{equation}
 
-# In[14]:
+# In[ ]:
 
 
 import numpy as np
@@ -75,7 +75,7 @@ import matplotlib.pyplot as plt
 from sequence_jacobian import simple, combine, create_model
 
 
-# In[15]:
+# In[ ]:
 
 
 @simple
@@ -103,7 +103,7 @@ def equilibrium(C, R, Y, I, beta, sigma, delta):
     return euler, goods
 
 
-# In[16]:
+# In[ ]:
 
 
 rbc = create_model([firm, household, capital, equilibrium], name="RBC")
@@ -112,7 +112,7 @@ print(rbc)
 print(f"Blocks: {rbc.blocks}")
 
 
-# In[17]:
+# In[ ]:
 
 
 unknowns = ['K', 'L']
@@ -120,7 +120,7 @@ targets = ['euler', 'goods']
 inputs = ['A']
 
 
-# In[18]:
+# In[ ]:
 
 
 # It is used the same calibration that the book suggests as well as the steady state values
@@ -129,7 +129,7 @@ unknowns_ss = {"K": 20, "L": 0.7}
 targets_ss = {"goods": 0., "euler": 0.}
 
 
-# In[19]:
+# In[ ]:
 
 
 ss = rbc.solve_steady_state(calibration, unknowns_ss, targets_ss, solver="hybr")
@@ -137,14 +137,14 @@ ss = rbc.solve_steady_state(calibration, unknowns_ss, targets_ss, solver="hybr")
 print(ss)
 
 
-# In[20]:
+# In[ ]:
 
 
 print(f"Euler equation: {ss['euler']}")
 print(f"Goods market clearing: {ss['goods']}")
 
 
-# In[21]:
+# In[ ]:
 
 
 G = rbc.solve_jacobian(ss, unknowns, targets, inputs, T=300)
@@ -152,7 +152,7 @@ G = rbc.solve_jacobian(ss, unknowns, targets, inputs, T=300)
 print(G)
 
 
-# In[22]:
+# In[ ]:
 
 
 # Here it is imposed a productivity shock
@@ -168,7 +168,7 @@ plt.legend()
 plt.show()
 
 
-# In[23]:
+# In[ ]:
 
 
 z_shock = 100 * dZ / ss['A']
@@ -181,7 +181,7 @@ dW = 100 * G['W']['A'] @ dZ / ss['W']
 dI = 100 * G['I']['A'] @ dZ / ss['I']
 
 
-# In[24]:
+# In[ ]:
 
 
 fig, axs = plt.subplots(2, 4, figsize=(12,6))
