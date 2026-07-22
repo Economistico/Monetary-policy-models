@@ -17,26 +17,21 @@
 # 
 # subject to: $P_t(C_t+I_t) = W_tL_t + R_tK_t + \Pi_t$
 # 
-# Also, capital accumulates according to: $K_{t+1} = (1-\delta)K_t + I_t$
-# 
-# 
-# 
 # Where:
-# - $C_t$: Household consumption at time t.
-# - $L_t$: Labor supplied by households at time t.
+# - $C_t$: Consumption of goods at time t.
+# - $L_t$: Number of hours worked at time t.
 # - $K_t$: Physical capital stock available at the beginning of period t.
-# - $I_t$: Investment at time t.
-# - $Y_t$: Aggregate output (GDP) at time t.
-# - $W_t$: Nominal wage rate.
-# - $R_t$: Nominal rental rate of capital.
-# - $P_t$: Aggregate price level.
-# - $\Pi_t$: Firms' profits, distributed to households.
-# - $\beta$: Household discount factor, measuring the degree of patience.
+# - $I_t$: Level of investment at time t.
+# - $W_t$: Level of wages at time t.
+# - $R_t$: Return on capital at time t.
+# - $P_t$: General price level at time t.
+# - $\Pi_t$: Firms' profits, distributed to households at time t.
+# - $\beta$: Intertemporal discount factor (measuring the degree of patience).
 # - $\sigma$: Coefficient of relative risk aversion (inverse of the intertemporal elasticity of substitution).
-# - $\phi$: Inverse of the Frisch elasticity of labor supply.
+# - $\phi$: Marginal disutility in respect of labor supply (inverse of the Frisch elasticity of labor supply).
 # 
-# 
-# 
+# Also, capital accumulates according to $K_{t+1} = (1-\delta)K_t + I_t$ , where:
+# - $\delta$: Depreciation rate of physical capital.
 # 
 # 
 # #### Firms:
@@ -45,9 +40,13 @@
 # \end{equation}
 # 
 # 
-# The production function is given by $Y_t = A_tK_t^{\alpha}L_t^{1-\alpha}$, where:
+# The production function is given by $Y_t = A_tK_t^{\alpha}L_t^{1-\alpha}$ , where:
 # 
-# - $A_t$: Total factor productivity (TFP), representing the level of technology.
+# - $Y_t$: Aggregate output (GDP) at time t.
+# - $A_t$: Total factor productivity (TFP), representing the level of technology at time t.
+# - $\alpha$: The elasticityof the level of production with respect to capital (the level of participation of capital in the productive
+# process).
+#     - $(1-\alpha)$: the level of participation of labor.
 # 
 # 
 # #### Equilibrium:
@@ -86,15 +85,23 @@
 #     Y_t = C_t + I_t
 # \end{equation}
 
-# In[ ]:
+# In[15]:
+
+
+# Use this package only if you want to visualize the DAG of he project 
+get_ipython().system('pip install graphviz')
+
+
+# In[16]:
 
 
 import numpy as np
 import matplotlib.pyplot as plt
 from sequence_jacobian import simple, combine, create_model
+from sequence_jacobian import drawdag # Import only if you want to visualize the DAG of the project 
 
 
-# In[ ]:
+# In[17]:
 
 
 @simple
@@ -122,7 +129,7 @@ def equilibrium(C, R, Y, I, beta, sigma, delta):
     return euler, goods
 
 
-# In[ ]:
+# In[18]:
 
 
 rbc = create_model([firm, household, capital, equilibrium], name="RBC")
@@ -131,7 +138,7 @@ print(rbc)
 print(f"Blocks: {rbc.blocks}")
 
 
-# In[ ]:
+# In[19]:
 
 
 unknowns = ['K', 'L']
@@ -139,7 +146,14 @@ targets = ['euler', 'goods']
 inputs = ['A']
 
 
-# In[ ]:
+# In[20]:
+
+
+# DAG: it shows the dynamic of the solution given to the RBC model.
+drawdag(rbc, inputs, unknowns, targets)
+
+
+# In[21]:
 
 
 # It is used the same calibration that the book suggests as well as the steady state values
@@ -148,7 +162,7 @@ unknowns_ss = {"K": 20, "L": 0.7}
 targets_ss = {"goods": 0., "euler": 0.}
 
 
-# In[ ]:
+# In[22]:
 
 
 ss = rbc.solve_steady_state(calibration, unknowns_ss, targets_ss, solver="hybr")
@@ -156,14 +170,14 @@ ss = rbc.solve_steady_state(calibration, unknowns_ss, targets_ss, solver="hybr")
 print(ss)
 
 
-# In[ ]:
+# In[23]:
 
 
 print(f"Euler equation: {ss['euler']}")
 print(f"Goods market clearing: {ss['goods']}")
 
 
-# In[ ]:
+# In[24]:
 
 
 G = rbc.solve_jacobian(ss, unknowns, targets, inputs, T=300)
@@ -171,7 +185,7 @@ G = rbc.solve_jacobian(ss, unknowns, targets, inputs, T=300)
 print(G)
 
 
-# In[ ]:
+# In[25]:
 
 
 # Here it is imposed a productivity shock
@@ -187,7 +201,7 @@ plt.legend()
 plt.show()
 
 
-# In[ ]:
+# In[26]:
 
 
 z_shock = 100 * dZ / ss['A']
@@ -200,7 +214,7 @@ dW = 100 * G['W']['A'] @ dZ / ss['W']
 dI = 100 * G['I']['A'] @ dZ / ss['I']
 
 
-# In[ ]:
+# In[27]:
 
 
 fig, axs = plt.subplots(2, 4, figsize=(12,6))
@@ -218,4 +232,10 @@ for ax, (data, title, color) in zip(axs.flatten(), series):
 fig.suptitle('Impulse Response Functions (IRFs) after a positive productivity shock of 1%', fontsize=16)
 plt.tight_layout()
 plt.show()
+
+
+# In[ ]:
+
+
+
 
