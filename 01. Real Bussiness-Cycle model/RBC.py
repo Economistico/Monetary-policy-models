@@ -85,23 +85,28 @@
 #     Y_t = C_t + I_t
 # \end{equation}
 
-# In[15]:
+# In[ ]:
 
 
 # Use this package only if you want to visualize the DAG of he project 
 get_ipython().system('pip install graphviz')
 
 
-# In[16]:
+# In[1]:
 
 
 import numpy as np
 import matplotlib.pyplot as plt
 from sequence_jacobian import simple, combine, create_model
+
+
+# In[2]:
+
+
 from sequence_jacobian import drawdag # Import only if you want to visualize the DAG of the project 
 
 
-# In[17]:
+# In[3]:
 
 
 @simple
@@ -129,7 +134,7 @@ def equilibrium(C, R, Y, I, beta, sigma, delta):
     return euler, goods
 
 
-# In[18]:
+# In[4]:
 
 
 rbc = create_model([firm, household, capital, equilibrium], name="RBC")
@@ -138,7 +143,7 @@ print(rbc)
 print(f"Blocks: {rbc.blocks}")
 
 
-# In[19]:
+# In[5]:
 
 
 unknowns = ['K', 'L']
@@ -146,14 +151,14 @@ targets = ['euler', 'goods']
 inputs = ['A']
 
 
-# In[20]:
+# In[6]:
 
 
 # DAG: it shows the dynamic of the solution given to the RBC model.
 drawdag(rbc, inputs, unknowns, targets)
 
 
-# In[21]:
+# In[7]:
 
 
 # It is used the same calibration that the book suggests as well as the steady state values
@@ -162,7 +167,7 @@ unknowns_ss = {"K": 20, "L": 0.7}
 targets_ss = {"goods": 0., "euler": 0.}
 
 
-# In[22]:
+# In[8]:
 
 
 ss = rbc.solve_steady_state(calibration, unknowns_ss, targets_ss, solver="hybr")
@@ -170,14 +175,14 @@ ss = rbc.solve_steady_state(calibration, unknowns_ss, targets_ss, solver="hybr")
 print(ss)
 
 
-# In[23]:
+# In[9]:
 
 
 print(f"Euler equation: {ss['euler']}")
 print(f"Goods market clearing: {ss['goods']}")
 
 
-# In[24]:
+# In[10]:
 
 
 G = rbc.solve_jacobian(ss, unknowns, targets, inputs, T=300)
@@ -185,7 +190,7 @@ G = rbc.solve_jacobian(ss, unknowns, targets, inputs, T=300)
 print(G)
 
 
-# In[25]:
+# In[11]:
 
 
 # Here it is imposed a productivity shock
@@ -201,7 +206,7 @@ plt.legend()
 plt.show()
 
 
-# In[26]:
+# In[12]:
 
 
 z_shock = 100 * dZ / ss['A']
@@ -214,12 +219,12 @@ dW = 100 * G['W']['A'] @ dZ / ss['W']
 dI = 100 * G['I']['A'] @ dZ / ss['I']
 
 
-# In[27]:
+# In[13]:
 
 
 fig, axs = plt.subplots(2, 4, figsize=(12,6))
 series = [(z_shock, 'Productivity shock', 'brown'), (dC, 'Consumption', 'blue'), (dY, 'Output', 'green'), (dL, 'Labor', 'red'), 
-          (dK, 'Capital', 'black'), (dR, 'Real rental rate', 'orange'), (dW, 'Real wage', 'purple'), (dI, 'Investment', 'cyan')]
+          (dK, 'Capital', 'black'), (dR, 'Return on capital', 'orange'), (dW, 'Level of wages', 'purple'), (dI, 'Investment', 'cyan')]
 
 for ax, (data, title, color) in zip(axs.flatten(), series):
     ax.plot(data[:100,0], linewidth=2.5, color=color)
@@ -232,10 +237,4 @@ for ax, (data, title, color) in zip(axs.flatten(), series):
 fig.suptitle('Impulse Response Functions (IRFs) after a positive productivity shock of 1%', fontsize=16)
 plt.tight_layout()
 plt.show()
-
-
-# In[ ]:
-
-
-
 
