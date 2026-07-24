@@ -92,7 +92,7 @@
 get_ipython().system('pip install graphviz')
 
 
-# In[1]:
+# In[16]:
 
 
 import numpy as np
@@ -100,13 +100,13 @@ import matplotlib.pyplot as plt
 from sequence_jacobian import simple, combine, create_model
 
 
-# In[2]:
+# In[17]:
 
 
 from sequence_jacobian import drawdag # Import only if you want to visualize the DAG of the project 
 
 
-# In[3]:
+# In[18]:
 
 
 @simple
@@ -134,7 +134,7 @@ def equilibrium(C, R, Y, I, beta, sigma, delta):
     return euler, goods
 
 
-# In[4]:
+# In[19]:
 
 
 rbc = create_model([firm, household, capital, equilibrium], name="RBC")
@@ -143,7 +143,7 @@ print(rbc)
 print(f"Blocks: {rbc.blocks}")
 
 
-# In[5]:
+# In[20]:
 
 
 unknowns = ['K', 'L']
@@ -151,14 +151,14 @@ targets = ['euler', 'goods']
 inputs = ['A']
 
 
-# In[6]:
+# In[21]:
 
 
 # DAG: it shows the dynamic of the solution given to the RBC model.
 drawdag(rbc, inputs, unknowns, targets)
 
 
-# In[7]:
+# In[22]:
 
 
 # It is used the same calibration that the book suggests as well as the steady state values
@@ -167,7 +167,7 @@ unknowns_ss = {"K": 20, "L": 0.7}
 targets_ss = {"goods": 0., "euler": 0.}
 
 
-# In[8]:
+# In[23]:
 
 
 ss = rbc.solve_steady_state(calibration, unknowns_ss, targets_ss, solver="hybr")
@@ -175,14 +175,14 @@ ss = rbc.solve_steady_state(calibration, unknowns_ss, targets_ss, solver="hybr")
 print(ss)
 
 
-# In[9]:
+# In[24]:
 
 
 print(f"Euler equation: {ss['euler']}")
 print(f"Goods market clearing: {ss['goods']}")
 
 
-# In[10]:
+# In[25]:
 
 
 G = rbc.solve_jacobian(ss, unknowns, targets, inputs, T=300)
@@ -190,7 +190,7 @@ G = rbc.solve_jacobian(ss, unknowns, targets, inputs, T=300)
 print(G)
 
 
-# In[11]:
+# In[26]:
 
 
 # Here it is imposed a productivity shock
@@ -199,14 +199,15 @@ dZ = np.empty((T, 2))
 dZ[:, 0] = impact * ss['A'] * rho**np.arange(T)
 
 plt.plot(100*dZ[:50, 0]/ss['A'], label='regular shock', linewidth=2.5)
-plt.title(r'Two TFP shocks')
+plt.title(r'TFP shock')
 plt.ylabel(r'% deviation from ss')
 plt.xlabel(r'quarters')
 plt.legend()
+plt.grid(True)
 plt.show()
 
 
-# In[12]:
+# In[27]:
 
 
 z_shock = 100 * dZ / ss['A']
@@ -219,7 +220,7 @@ dW = 100 * G['W']['A'] @ dZ / ss['W']
 dI = 100 * G['I']['A'] @ dZ / ss['I']
 
 
-# In[13]:
+# In[28]:
 
 
 fig, axs = plt.subplots(2, 4, figsize=(12,6))
